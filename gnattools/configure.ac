@@ -1,5 +1,5 @@
 # Configure script for libada.
-#   Copyright 2003, 2004, 2009, 2012 Free Software Foundation, Inc.
+#   Copyright 2003, 2004, 2009 Free Software Foundation, Inc.
 #
 # This file is free software; you can redistribute it and/or modify it
 # under the terms of the GNU General Public License as published by
@@ -109,6 +109,9 @@ case "${target}" in
     ;;
   ia64-hp-hpux11*)
     TOOLS_TARGET_PAIRS="mlib-tgt-specific.adb<mlib-tgt-specific-ia64-hpux.adb"
+    ;;
+  alpha*-dec-osf*)
+    TOOLS_TARGET_PAIRS="mlib-tgt-specific.adb<mlib-tgt-specific-tru64.adb"
     ;;
   alpha*-*-vms* | alpha*-*-openvms*)
     TOOLS_TARGET_PAIRS="\

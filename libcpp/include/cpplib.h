@@ -26,6 +26,10 @@ along with this program; see the file COPYING3.  If not see
 #include "symtab.h"
 #include "line-map.h"
 
+#ifdef __cplusplus
+extern "C" { //jaykrell hack
+#endif
+
 typedef struct cpp_reader cpp_reader;
 typedef struct cpp_buffer cpp_buffer;
 typedef struct cpp_options cpp_options;
@@ -1055,5 +1059,9 @@ extern bool cpp_userdef_char_p
   (enum cpp_ttype type);
 extern const char * cpp_get_userdef_suffix
   (const cpp_token *);
+
+#ifdef __cplusplus
+} //jaykrell hack
+#endif
 
 #endif /* ! LIBCPP_CPPLIB_H */

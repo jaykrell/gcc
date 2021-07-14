@@ -59,6 +59,10 @@ typedef __builtin_va_list __gnuc_va_list;
    but must not use that name.  It should use the name __gnuc_va_list,
    which is safe because it is reserved for the implementation.  */
 
+#ifdef _HIDDEN_VA_LIST  /* On OSF1, this means varargs.h is "half-loaded".  */
+#undef _VA_LIST
+#endif
+
 #ifdef _BSD_VA_LIST
 #undef _BSD_VA_LIST
 #endif

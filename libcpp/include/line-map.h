@@ -22,6 +22,10 @@ along with this program; see the file COPYING3.  If not see
 #ifndef LIBCPP_LINE_MAP_H
 #define LIBCPP_LINE_MAP_H
 
+#ifdef __cplusplus
+extern "C" { //jaykrell hack
+#endif
+
 #ifndef GTY
 #define GTY(x) /* nothing */
 #endif
@@ -773,5 +777,9 @@ void linemap_dump (FILE *, struct line_maps *, unsigned, bool);
    NUM_ORDINARY specifies how many ordinary maps to dump.  NUM_MACRO
    specifies how many macro maps to dump.  */
 void line_table_dump (FILE *, struct line_maps *, unsigned int, unsigned int);
+
+#ifdef __cplusplus
+} //jaykrell hack
+#endif
 
 #endif /* !LIBCPP_LINE_MAP_H  */

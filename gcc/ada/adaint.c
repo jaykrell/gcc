@@ -6,7 +6,7 @@
  *                                                                          *
  *                          C Implementation File                           *
  *                                                                          *
- *          Copyright (C) 1992-2012, Free Software Foundation, Inc.         *
+ *          Copyright (C) 1992-2011, Free Software Foundation, Inc.         *
  *                                                                          *
  * GNAT is free software;  you can  redistribute it  and/or modify it under *
  * terms of the  GNU General Public License as published  by the Free Soft- *
@@ -2467,7 +2467,8 @@ __gnat_number_of_cpus (void)
 {
   int cores = 1;
 
-#if defined (linux) || defined (sun) || defined (AIX) || defined (__APPLE__)
+#if defined (linux) || defined (sun) || defined (AIX) \
+    || (defined (__alpha__)  && defined (_osf_)) || defined (__APPLE__)
   cores = (int) sysconf (_SC_NPROCESSORS_ONLN);
 
 #elif defined (__hpux__)
@@ -3519,6 +3520,7 @@ _flush_cache()
       && ! defined (__hpux__) \
       && ! defined (__APPLE__) \
       && ! defined (_AIX) \
+      && ! (defined (__alpha__)  && defined (__osf__)) \
       && ! defined (VMS) \
       && ! defined (__MINGW32__))
 

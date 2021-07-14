@@ -107,9 +107,9 @@ case ${host} in
 	;;
     esac
     ;;
-  alpha*-*-linux*)
+  alpha*-*-linux* | alpha*-dec-osf*)
     case ${target} in
-      alpha*-*-linux*)
+      alpha*-*-linux* | alpha*-dec-osf*)
 	host_extra_gcc_objs="driver-alpha.o"
 	host_xmake_file="${host_xmake_file} alpha/x-alpha"
 	;;
@@ -184,6 +184,26 @@ esac
 
 # Machine-specific settings.
 case ${host} in
+  alpha64-dec-*vms*)
+    host_xm_file="vms/xm-vms.h vms/xm-vms64.h"
+    host_xmake_file=vms/x-vms
+    host_exeext=.exe
+    host_can_use_collect2=no
+    prefix=/gnu
+    local_prefix=/gnu/local
+    ;;
+  alpha*-dec-osf*)
+    out_host_hook_obj=host-osf.o
+    host_xmake_file="${host_xmake_file} alpha/x-osf"
+    ;;
+  alpha*-dec-*vms*)
+    host_xm_file="vms/xm-vms.h"
+    host_xmake_file=vms/x-vms
+    host_exeext=.exe
+    host_can_use_collect2=no
+    prefix=/gnu
+    local_prefix=/gnu/local
+    ;;
   hppa1.0-*-hpux10* | hppa1.1-*-hpux10* | hppa2*-*-hpux10*)
     out_host_hook_obj=host-hpux.o
     host_xmake_file="${host_xmake_file} x-hpux"

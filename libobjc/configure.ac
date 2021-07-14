@@ -70,6 +70,13 @@ AC_ARG_ENABLE(objc-gc,
     OBJC_GCFLAGS='-DOBJC_WITH_GC=1'
     OBJC_BOEHM_GC='libobjc_gc$(libsuffix).la'
     OBJC_BOEHM_GC_INCLUDES='-I$(top_srcdir)/../boehm-gc/include -I../boehm-gc/include'
+    case "${host}" in
+      alpha*-dec-osf*)
+        # boehm-gc headers include <pthread.h>, which needs to be compiled
+	# with -pthread on Tru64 UNIX.
+        OBJC_GCFLAGS="${OBJC_GCFLAGS} -pthread"
+	;;
+    esac
     ;;
 esac],
 [OBJC_GCFLAGS=''; OBJC_BOEHM_GC=''; OBJC_BOEHM_GC_INCLUDES=''])

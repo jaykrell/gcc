@@ -20,6 +20,8 @@
 
 # Options:
 #   "-v leading_underscore=1" : Symbols in map need leading underscore.
+#   "-v osf_export=1"	      : Create -input file for Tru64 UNIX linker
+#				instead of map file.
 #   "-v pe_dll=1"             : Create .DEF file for Windows PECOFF
 #                               DLL link instead of map file.
 
@@ -98,6 +100,10 @@ END {
   }
 
   for (sym in export)
-    if (def[sym] || (pe_dll && def["_" sym]))
-      print sym;
+    if (def[sym] || (pe_dll && def["_" sym])) {
+      if (!osf_export)
+	print sym;
+      else
+	print "-exported_symbol " sym;
+    }
 }

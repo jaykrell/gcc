@@ -885,6 +885,9 @@ c_cpp_builtins (cpp_reader *pfile)
   /* Show the availability of some target pragmas.  */
   cpp_define (pfile, "__PRAGMA_REDEFINE_EXTNAME");
 
+  if (targetm.handle_pragma_extern_prefix)
+    cpp_define (pfile, "__PRAGMA_EXTERN_PREFIX");
+
   /* Make the choice of the stack protector runtime visible to source code.
      The macro names and values here were chosen for compatibility with an
      earlier implementation, i.e. ProPolice.  */

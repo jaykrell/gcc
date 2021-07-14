@@ -1454,7 +1454,7 @@ finish_eh_generation (void)
   break_superblocks ();
 
   if (targetm_common.except_unwind_info (&global_options) == UI_SJLJ
-      /* Kludge for Alpha (see alpha_gp_save_rtx).  */
+      /* Kludge for Alpha/Tru64 (see alpha_gp_save_rtx).  */
       || single_succ_edge (ENTRY_BLOCK_PTR)->insns.r)
     commit_edge_insertions ();
 

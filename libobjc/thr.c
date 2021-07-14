@@ -27,8 +27,11 @@ see the files COPYING3 and COPYING.RUNTIME respectively.  If not, see
 #define _LIBOBJC
 /* The line below is needed for declarations of functions such as
    pthread_mutexattr_settype, without which gthr-posix.h may fail to
-   compile within libobjc.  */
+   compile within libobjc.  Unfortunately, this breaks compilation on
+   Tru64 UNIX V4.0F, so disable it there.  */
+#ifndef __osf__
 #define _XOPEN_SOURCE 500
+#endif
 #include "config.h"
 #include "tconfig.h"
 #include "coretypes.h"

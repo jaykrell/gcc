@@ -20,6 +20,10 @@ along with this program; see the file COPYING3.  If not see
 
 #include "obstack.h"
 
+#ifdef __cplusplus
+extern "C" { //jaykrell hack
+#endif
+
 #ifndef GTY
 #define GTY(x) /* nothing */
 #endif
@@ -99,5 +103,9 @@ extern void ht_load (cpp_hash_table *ht, hashnode *entries,
 
 /* Dump allocation statistics to stderr.  */
 extern void ht_dump_statistics (cpp_hash_table *);
+
+#ifdef __cplusplus
+} //jaykrell hack
+#endif
 
 #endif /* LIBCPP_SYMTAB_H */

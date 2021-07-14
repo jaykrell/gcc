@@ -123,8 +123,8 @@ DJGPP			DJ Delorie		dj@delorie.com
 freebsd			Loren J. Rittle		ljrittle@acm.org
 GNU/Hurd		Thomas Schwinge		thomas@schwinge.name
 hpux			John David Anglin	dave.anglin@nrc-cnrc.gc.ca
-hpux			Steve Ellcey		sellcey@mips.com
-solaris			Rainer Orth		ro@CeBiTec.Uni-Bielefeld.DE
+hpux			Steve Ellcey		sje@cup.hp.com
+irix, osf, solaris	Rainer Orth		ro@CeBiTec.Uni-Bielefeld.DE
 netbsd			Jason Thorpe		thorpej@netbsd.org
 netbsd			Krister Walfridsson	krister.walfridsson@gmail.com
 sh-linux-gnu		Kaz Kojima		kkojima@gcc.gnu.org

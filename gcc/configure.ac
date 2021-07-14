@@ -3260,6 +3260,16 @@ else
   [set_have_as_tls=yes])
 fi
 case "$target" in
+  *-*-irix6*)
+    # IRIX 6.5 rld and libc.so lack TLS support, so even if gas and gld
+    # with TLS support are in use, native TLS cannot work.
+    set_have_as_tls=no
+    ;;
+  *-*-osf*)
+    # Tru64 UNIX loader and libc.so lack TLS support, so even if gas and
+    # gld with TLS support are in use, native TLS cannot work.
+    set_have_as_tls=no
+    ;;
   # TLS was introduced in the Solaris 9 FCS release.  Support for GNU-style
   # TLS on x86 was only introduced in Solaris 9 4/04, replacing the earlier
   # Sun style that Sun ld and GCC don't support any longer.
@@ -3342,6 +3352,12 @@ elif test x$gcc_cv_ld != x; then
 	gcc_cv_ld_static_option="-bstatic"
 	gcc_cv_ld_dynamic_option="-bdynamic"
 	;;
+      # Tru64 UNIX support -noso/-so_archive instead of -Bstatic/-Bdynamic.
+      alpha*-dec-osf*)
+        gcc_cv_ld_static_dynamic=yes
+	gcc_cv_ld_static_option="-noso"
+	gcc_cv_ld_dynamic_option="-so_archive"
+        ;;
       # HP-UX ld uses -a flags to select between shared and archive.
       *-*-hpux*)
 	if test x"$gnu_ld" = xno; then
@@ -3470,7 +3486,7 @@ AS_HELP_STRING([--disable-fix-cortex-a53-835769],
     [])
   ;;
   # All TARGET_ABI_OSF targets.
-  alpha*-*-linux* | alpha*-*-*bsd*)
+  alpha*-*-osf* | alpha*-*-linux* | alpha*-*-*bsd*)
     gcc_GAS_CHECK_FEATURE([explicit relocation support],
 	gcc_cv_as_alpha_explicit_relocs, [2,12,0],,
 [	.set nomacro

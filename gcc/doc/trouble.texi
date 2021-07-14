@@ -18,6 +18,7 @@ where people's opinions differ as to what is best.
 
 @menu
 * Actual Bugs::         Bugs we will fix later.
+* Cross-Compiler Problems:: Common problems of cross compiling with GCC.
 * Interoperation::      Problems using GCC with other compilers,
                         and with certain linkers, assemblers and debuggers.
 * Incompatibilities::   GCC is incompatible with traditional C.
@@ -41,6 +42,19 @@ The @code{fixincludes} script interacts badly with automounters; if the
 directory of system header files is automounted, it tends to be
 unmounted while @code{fixincludes} is running.  This would seem to be a
 bug in the automounter.  We don't know any good way to work around it.
+@end itemize
+
+@node Cross-Compiler Problems
+@section Cross-Compiler Problems
+
+You may run into problems with cross compilation on certain machines,
+for several reasons.
+
+@itemize @bullet
+@item
+At present, the program @file{mips-tfile} which adds debug
+support to object files on Tru64 UNIX systems does not work in a cross
+compile environment.
 @end itemize
 
 @node Interoperation

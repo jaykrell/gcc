@@ -53,3 +53,8 @@ genrecog.c
 gensupport.c
 gensupport.h
 read-md.c
+
+#   These files are not yet internationalized, because they contain
+#   many strings that require a lot of analysis, and are little-used.
+mips-tdump.c
+mips-tfile.c

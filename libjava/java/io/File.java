@@ -1,5 +1,5 @@
 /* File.java -- Class representing a file on disk
-   Copyright (C) 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007, 2012
+   Copyright (C) 1998, 1999, 2000, 2001, 2003, 2004, 2005, 2006, 2007
    Free Software Foundation, Inc.
 
 This file is part of GNU Classpath.
@@ -79,8 +79,11 @@ public class File implements Serializable, Comparable<File>
   private final static int LENGTH = 1;
   
   private final native long attr (int query);
-  private final native boolean access (int query);
-  private final native boolean stat (int query);
+  // On OSF1 V5.0, `stat' is a macro.  It is easiest to use the name
+  // `_stat' instead.  We do the same thing for `_access' just in
+  // case.
+  private final native boolean _access (int query);
+  private final native boolean _stat (int query);
 
   /**
    * This is the path separator string for the current host. This field
@@ -158,7 +161,7 @@ public class File implements Serializable, Comparable<File>
   public boolean canRead()
   {
     checkRead();
-    return access (READ);
+    return _access (READ);
   }
 
   /**
@@ -178,7 +181,7 @@ public class File implements Serializable, Comparable<File>
   public boolean canWrite()
   {
     checkWrite();
-    return access (WRITE);
+    return _access (WRITE);
   }
   
   /**
@@ -199,7 +202,7 @@ public class File implements Serializable, Comparable<File>
     if (!exists())
       return false;
     checkExec();
-    return access (EXEC);
+    return _access (EXEC);
   }
 
   private native boolean performCreate() throws IOException;
@@ -285,7 +288,7 @@ public class File implements Serializable, Comparable<File>
    */
   private boolean internalExists()
   {
-    return access (EXISTS);
+    return _access (EXISTS);
   }
   
   /**
@@ -722,7 +725,7 @@ public class File implements Serializable, Comparable<File>
    */
   private boolean internalIsDirectory()
   {
-    return stat (DIRECTORY);
+    return _stat (DIRECTORY);
   }
   
   /**
@@ -754,7 +757,7 @@ public class File implements Serializable, Comparable<File>
   public boolean isFile()
   {
     checkRead();
-    return stat (ISFILE);
+    return _stat (ISFILE);
   }
 
   /**
@@ -771,7 +774,7 @@ public class File implements Serializable, Comparable<File>
   public boolean isHidden()
   {
     checkRead();
-    return stat (ISHIDDEN);
+    return _stat (ISHIDDEN);
   }
 
   /**

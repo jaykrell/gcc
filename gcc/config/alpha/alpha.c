@@ -4712,7 +4712,7 @@ struct GTY(()) machine_function
   /* For OSF.  */
   const char *some_ld_name;
 
-  /* For flag_reorder_blocks_and_partition.  */
+  /* For TARGET_LD_BUGGY_LDGP.  */
   rtx gp_save_rtx;
 
   /* For VMS condition handlers.  */
@@ -7850,8 +7850,10 @@ alpha_start_function (FILE *file, const char *fnname,
   HOST_WIDE_INT sa_size;
   /* Complete stack size needed.  */
   unsigned HOST_WIDE_INT frame_size;
-  /* The maximum debuggable frame size.  */
-  unsigned HOST_WIDE_INT max_frame_size = 1UL << 31;
+  /* The maximum debuggable frame size (512 Kbytes using Tru64 as).  */
+  unsigned HOST_WIDE_INT max_frame_size = TARGET_ABI_OSF && !TARGET_GAS
+					  ? 524288
+					  : 1UL << 31;
   /* Offset from base reg to register save area.  */
   HOST_WIDE_INT reg_offset;
   char *entry_label = (char *) alloca (strlen (fnname) + 6);
